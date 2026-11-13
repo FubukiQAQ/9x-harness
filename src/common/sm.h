@@ -67,7 +67,8 @@ const char *sb_str(Sb *b);       /* 保证 NUL 结尾，可能返回 "" */
 /* ---------------- 字符集转换 ---------------- */
 /* 返回静态/新建缓冲区；*out 需 sm_free */
 char *sm_utf8_to_ansi(const char *u);          /* UTF-8 -> GBK/CP_ACP */
-char *sm_ansi_to_utf8(const char *a);          /* GBK/CP_ACP -> UTF-8 */
+char *sm_ansi_to_utf8(const char *a);
+int sm_utf8_sanitize(char *s);          /* GBK/CP_ACP -> UTF-8 */
 char *sm_conv(UINT from, UINT to, const char *s, int len); /* len<0 => strlen */
 
 /* ---------------- 文件 / 路径 ---------------- */

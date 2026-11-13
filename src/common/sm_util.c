@@ -153,6 +153,44 @@ char *sm_conv(UINT from, UINT to, const char *s, int len)
     return out;
 }
 
+/* 检查并修补 UTF-8：非法字节就地换成 '?'，返回被替换的字节数。
+ * JSON 请求体里混进 GBK 原始字节时，服务端会直接拒收整条请求，所以发送前过一遍。 */
+int sm_utf8_sanitize(char *s)
+{
+    unsigned char *p = (unsigned char *)s;
+    int bad = 0;
+
+    if (!s) return 0;
+    while (*p) {
+        unsigned char c = *p;
+        int extra, i;
+        unsigned int cp;
+
+        if (c < 0x80) { p++; continue; }
+        if (c >= 0xC2 && c <= 0xDF) { extra = 1; cp = c & 0x1F; }
+        else if (c >= 0xE0 && c <= 0xEF) { extra = 2; cp = c & 0x0F; }
+        else if (c >= 0xF0 && c <= 0xF4) { extra = 3; cp = c & 0x07; }
+        else { *p = '?'; bad++; p++; continue; }
+
+        for (i = 1; i <= extra; i++) {
+            if ((p[i] & 0xC0) != 0x80) break;
+            cp = (cp << 6) | (p[i] & 0x3F);
+        }
+        if (i <= extra ||                       /* 续字节不全 */
+            (extra == 2 && cp < 0x800) ||       /* 过长编码 */
+            (extra == 3 && cp < 0x10000) ||
+            cp > 0x10FFFF ||
+            (cp >= 0xD800 && cp <= 0xDFFF)) {   /* 代理区 */
+            *p = '?';
+            bad++;
+            p++;
+            continue;
+        }
+        p += extra + 1;
+    }
+    return bad;
+}
+
 char *sm_utf8_to_ansi(const char *u) { return sm_conv(CP_UTF8, CP_ACP, u, -1); }
 char *sm_ansi_to_utf8(const char *a) { return sm_conv(CP_ACP, CP_UTF8, a, -1); }
 

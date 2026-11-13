@@ -55,8 +55,13 @@ static char *build_request(void)
             if (b64) {
                 sm_b64_encode(g_shot_png, g_shot_len, b64, 0);
                 sb_putc(&b, ',');
+                /* 注意：这段文字必须走 sb_put_json_str()，
+                 * 不能写成 C 的 \uXXXX 转义——那会被编译器转成 GBK 原始字节，
+                 * 直接塞进 JSON 就是非法 UTF-8，服务端会拒收整个请求。 */
                 sb_puts(&b, "{\"role\":\"user\",\"content\":["
-                            "{\"type\":\"text\",\"text\":\"[\u5c4f\u5e55\u622a\u56fe]\"},"
+                            "{\"type\":\"text\",\"text\":");
+                sb_put_json_str(&b, TS("[屏幕截图]", "[Screen capture]"));
+                sb_puts(&b, "},"
                             "{\"type\":\"image_url\",\"image_url\":{"
                             "\"url\":\"data:image/png;base64,");
                 sb_puts(&b, b64);
@@ -99,7 +104,16 @@ static char *build_request(void)
     sm_free(sys);
     /* 截图是一次性的：发出去就释放，避免下次重复附带旧画面 */
     if (g_shot_png) { sm_free(g_shot_png); g_shot_png = NULL; g_shot_len = 0; }
-    return sb_take(&b);
+    /* 保险：整条请求体必须是合法 UTF-8。
+     * 历史上这里出过一次事故——截图提示文字写成了 C 的 \uXXXX 转义，
+     * 在 -fexec-charset=GBK 下被编译成 GBK 原始字节，服务端直接拒收请求。 */
+    {
+        char *raw = sb_take(&b);
+        int bad = sm_utf8_sanitize(raw);
+        if (bad)
+            sm_logf("request: fixed %d invalid utf-8 byte(s) in the body", bad);
+        return raw;
+    }
 }
 
 char *llm_build_request(int *outLen)
