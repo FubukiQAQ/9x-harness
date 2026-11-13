@@ -7,7 +7,8 @@ int main(int argc, char **argv)
     char rep[4096];
     int i;
 
-    printf("=== NeuroBench %s 自检 ===\n", SM_VERSION_STR);
+    printf("=== " SM_PRODUCT_NAME " %s 自检 ===
+", SM_VERSION_STR);
     printf("OS: %s\n", sm_get_os_name());
     printf("CP: %u\n", sm_system_codepage());
 

@@ -23,7 +23,7 @@ static void build_report(Sb *b)
     HDC dc;
     char *v;
 
-    sb_printf(b, "NeuroBench 2003 系统信息报告\r\n");
+    sb_printf(b, SM_PRODUCT_NAME " 系统信息报告\r\n");
     {
         char ts[40];
         sm_now_str(ts, sizeof(ts));
@@ -72,7 +72,7 @@ static void build_report(Sb *b)
     if (v) { sb_printf(b, "Internet Explorer  %s\r\n", v); sm_free(v); }
 
     sb_puts(b, "------------------------------------------------------------\r\n");
-    sb_puts(b, "NeuroBench 版本  " SM_VERSION_STR "\r\n");
+    sb_puts(b, SM_PRODUCT_NAME " 版本  " SM_VERSION_STR "\r\n");
     {
         char *d = sm_app_dir();
         sb_printf(b, "安装目录        %s\r\n", d);

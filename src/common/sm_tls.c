@@ -527,7 +527,7 @@ static long long http_date_probe(const char *host, int timeoutSec, volatile LONG
     s = tcp_connect(host, 80, timeoutSec * 1000, err, sizeof(err));
     if (s == INVALID_SOCKET) return 0;
     _snprintf(req, sizeof(req),
-              "HEAD / HTTP/1.0\r\nHost: %s\r\nUser-Agent: NeuroBench/%s\r\n\r\n",
+              "HEAD / HTTP/1.0\r\nHost: %s\r\nUser-Agent: " SM_EXE_BASE "/%s\r\n\r\n",
               host, SM_VERSION_STR);
     if (send(s, req, (int)strlen(req), 0) == SOCKET_ERROR) { closesocket(s); return 0; }
     for (;;) {
@@ -670,7 +670,7 @@ static int do_request(const Req *rq, int is_tls, SmHttpResult *res,
     sb_init(&reqhdr);
     sb_printf(&reqhdr, "POST %s HTTP/1.1\r\n", rq->path);
     sb_printf(&reqhdr, "Host: %s\r\n", rq->host);
-    sb_printf(&reqhdr, "User-Agent: NeuroBench/%s (Windows; 32-bit)\r\n", SM_VERSION_STR);
+    sb_printf(&reqhdr, "User-Agent: " SM_EXE_BASE "/%s (Windows; 32-bit)\r\n", SM_VERSION_STR);
     sb_puts(&reqhdr, "Accept: */*\r\n");
     sb_puts(&reqhdr, "Accept-Encoding: identity\r\n");
     sb_puts(&reqhdr, "Connection: close\r\n");
@@ -692,7 +692,7 @@ static int do_request(const Req *rq, int is_tls, SmHttpResult *res,
                       "与服务器建立安全连接失败：\r\n\r\n%s\r\n\r\n"
                       "可能原因：服务器地址不正确、本机系统时间错误，"
                       "或网络中的防火墙拦截了 443 端口。\r\n\r\n"
-                      "（NeuroBench 使用内置的 SSL/TLS 1.2 组件进行加密通信）",
+                      "（" SM_PRODUCT_NAME " 使用内置的 SSL/TLS 1.2 组件进行加密通信）",
                       tls_err_text(e, tb, sizeof(tb)));
             res->errmsg[sizeof(res->errmsg) - 1] = 0;
             if (e == BR_ERR_X509_EXPIRED || e == BR_ERR_X509_TIME_UNKNOWN) rc = -1;

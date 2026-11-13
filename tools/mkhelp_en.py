@@ -24,12 +24,14 @@ def _brand(text):
     base = exe[:-4]
     out = text
     out = out.replace("Axiom NeuroBench 2003", prod)
-    out = out.replace("NeuroBench 2003", short)
     out = out.replace("Software\\Axiom\\NeuroBench2003", reg)
+    out = out.replace("NeuroBench 2003", short)
     out = out.replace("Application Data\\NeuroBench", "Application Data\\" + short)
     out = out.replace("NEBENCH.INI", ini)
-    out = out.replace("NEUROBENCH.LIC", base + ".LIC")
+    out = out.replace("NEBENCH.LIC", base + ".LIC")
     out = out.replace("NEUROBENCH.EXE", exe)
+    out = out.replace("NEUROBENCH.CHM", base + ".CHM")
+    out = out.replace("NeuroBench", short)          # 裸词（帮助正文里的口语提法）
     return out
 
 

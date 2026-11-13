@@ -226,6 +226,7 @@ def main():
         "product": name, "short": short, "company": comp, "version": ver,
         "exe": exe, "slug": slug, "iso_label": iso1, "iso_label_tools": iso2,
         "install_subdir": subdir, "menu_group": menu,
+        "ini_name": ini_name, "reg_root": reg_root,
     }
     with io.open(os.path.join(out_dir, "brand_summary.json"), "w", encoding="utf-8") as f:
         import json

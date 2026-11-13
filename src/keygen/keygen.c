@@ -72,7 +72,7 @@ static void do_generate(HWND h)
     serial = (int)sm_to_long(buf, 1);
 
     sb_init(&b);
-    sb_puts(&b, "; Axiom NeuroBench 2003 - 产品序列号清单\r\n");
+    sb_puts(&b, "; " SM_PRODUCT_NAME " - 产品序列号清单\r\n");
     {
         char ts[40];
         char edn[32];
@@ -164,8 +164,8 @@ LRESULT CALLBACK KeygenProc(HWND h, UINT m, WPARAM w, LPARAM l)
         mk(h, "BUTTON", TS("退出(&X)",
            "E&xit"), BS_PUSHBUTTON | WS_TABSTOP, 368, 380, 80, 26, IDC_CLOSE, g_font);
 
-        mk(h, "STATIC", TS("内部工具 · 请勿外传 · (C) 1993-2003 Axiom Software",
-           "Internal tool - do not distribute - (C) 1993-2003 Axiom Software"),
+        mk(h, "STATIC", TS("内部工具 · 请勿外传 · " SM_COPYRIGHT,
+           "Internal tool - do not distribute - " SM_COPYRIGHT),
            SS_LEFT, 8, 412, 440, 16, 0, g_font);
         return 0;
     }
@@ -281,8 +281,8 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
     if (!RegisterClassA(&wc)) return 1;
 
     h = CreateWindowExA(WS_EX_DLGMODALFRAME, "NeuroBenchKeygen",
-        TS("NeuroBench 2003 产品序列号生成器 [OEM 内部工具]",
-           "NeuroBench 2003 Product Key Generator [OEM internal]"),
+        TS(SM_PRODUCT_NAME " 产品序列号生成器 [OEM 内部工具]",
+           SM_PRODUCT_NAME_EN " Product Key Generator [OEM internal]"),
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
         CW_USEDEFAULT, CW_USEDEFAULT, 470, 470, NULL, NULL, inst, NULL);
     if (!h) return 1;

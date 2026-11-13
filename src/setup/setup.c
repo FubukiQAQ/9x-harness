@@ -689,7 +689,7 @@ static void write_uninstall_list(const char *dir, SmArc *arc, const char *startM
     if (desktopLnk) sb_printf(&b, "L|%s\r\n", desktopLnk);
     if (sm_uninst_root()[0])
         sb_printf(&b, "R|%s\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" SM_SHORT_NAME "\r\n", sm_uninst_root());
-    sb_puts(&b, "R|HKCU\\Software\\Axiom\\NeuroBench2003\r\n");
+    sb_printf(&b, "R|HKCU\\%s\r\n", SM_REG_ROOT);
     p = sm_path_join(dir, "UNINST.LST");
     sm_write_file(p, sb_str(&b), (long)b.len);
     sm_free(p);
@@ -909,8 +909,8 @@ static int do_install(void)
         char *save_dir;
         sm_config_defaults(&c);
         /* 直接以目标目录写 INI */
-        sm_ini_set(ini, "NeuroBench", "Product", SM_SHORT_NAME);
-        sm_ini_set(ini, "NeuroBench", "Version", S.appVersion);
+        sm_ini_set(ini, SM_SHORT_NAME, "Product", SM_SHORT_NAME);
+        sm_ini_set(ini, SM_SHORT_NAME, "Version", S.appVersion);
         sm_ini_set(ini, "connection", "endpoint", c.endpoint);
         sm_ini_set(ini, "connection", "model", c.model);
         sm_ini_set(ini, "connection", "temperature", "7");
@@ -1116,7 +1116,7 @@ static int next_allowed(void)
            "Setup"), MB_ICONSTOP | MB_OK); return 0; }
         if (strlen(S.dir) < 3 || S.dir[1] != ':') {
             MessageBoxA(S.h, "目标文件夹必须是一个完整的路径，例如：\r\n"
-   "C:\\Program Files\\Axiom\\" SM_SHORT_NAME "",
+   "C:\\Program Files\\" SM_INSTALL_SUBDIR,
                         TS("安装程序",
            "Setup"), MB_ICONSTOP | MB_OK);
             return 0;
@@ -1306,7 +1306,7 @@ static void load_setup_ins(void)
 
     if (!S.defaultDir[0]) {
         char *pf = shell_folder(0x0026);   /* CSIDL_PROGRAM_FILES */
-        char *sub = sm_path_join(pf, "Axiom\\" SM_SHORT_NAME "");
+        char *sub = sm_path_join(pf, SM_INSTALL_SUBDIR);
         strncpy(S.defaultDir, sub, MAX_PATH - 1);
         sm_free(sub);
         sm_free(pf);
@@ -1446,7 +1446,7 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
         DWORD st = WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_CLIPCHILDREN;
         AdjustWindowRectEx(&rc, st, FALSE, WS_EX_DLGMODALFRAME);
         h = CreateWindowExA(WS_EX_DLGMODALFRAME, "NeuroBenchSetup",
-                            TS("NeuroBench 2003 安装程序", "NeuroBench 2003 Setup"), st,
+                            TS(SM_SHORT_NAME " 安装程序", SM_SHORT_NAME_EN " Setup"), st,
                             CW_USEDEFAULT, CW_USEDEFAULT,
                             rc.right - rc.left, rc.bottom - rc.top,
                             NULL, NULL, inst, NULL);
@@ -1457,7 +1457,7 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
     /* 标题与底部按钮（常驻） */
     {
         HWND c;
-        c = CreateWindowExA(0, "STATIC", TS("欢迎使用 NeuroBench 2003 安装向导", "Welcome to NeuroBench 2003 Setup"),
+        c = CreateWindowExA(0, "STATIC", TS("欢迎使用 " SM_PRODUCT_NAME " 安装向导", "Welcome to " SM_PRODUCT_NAME_EN " Setup"),
                             WS_CHILD | WS_VISIBLE | SS_LEFT, CONTENT_X, 10, CONTENT_W, 26,
                             h, (HMENU)IDC_TITLE, inst, NULL);
         SendMessageA(c, WM_SETFONT, (WPARAM)S.fTitle, MAKELPARAM(TRUE, 0));

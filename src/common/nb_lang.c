@@ -123,7 +123,7 @@ static const char *T[S__COUNT][2] = {
 /* STR_PANE_NOWORKSPACE */ { "(没有工作区)", "(no workspace)" },
 
 /* STR_SPEAKER_YOU */   { "你", "You" },
-/* STR_SPEAKER_BOT */   { "NeuroBench", "NeuroBench" },
+/* STR_SPEAKER_BOT */   { SM_SHORT_NAME, SM_SHORT_NAME_EN },
 /* STR_SPEAKER_NOTICE */{ "提示", "Notice" },
 /* STR_MSG_WELCOME */   { "欢迎使用 " SM_PRODUCT_NAME "。", "Welcome to " SM_PRODUCT_NAME_EN "." },
 /* STR_MSG_NOKEY */     { "尚未配置服务器与 API 密钥。请使用『工具 - 设置』进行配置，配置完成后点击『发送』开始对话。",
@@ -197,7 +197,7 @@ static const char *T[S__COUNT][2] = {
                         "Warning: the license information has been modified; the program may not work correctly." },
 /* STR_ACT_GO */        { "激活(&A)", "&Activate" },
 /* STR_ACT_LATER */     { "以后再说(&L)", "&Later" },
-/* STR_ACT_OKMSG */     { "激活成功！\r\n\r\n本产品已获得合法授权，感谢您使用 Axiom Software 的产品。",
+/* STR_ACT_OKMSG */     { "激活成功！\r\n\r\n本产品已获得合法授权，感谢您使用 " SM_COMPANY " 的产品。",
                         "Activation successful!\r\n\r\nThank you for using a " SM_COMPANY_EN " product." },
 /* STR_ACT_BADKEY */    { "产品序列号无效。请检查输入是否正确，或与经销商联系更换。",
                         "Invalid product key. Please check the characters, or contact your dealer." },

@@ -13,6 +13,7 @@
  * 急停：执行任何动作前检查 Ctrl+Alt+End，按下则拒绝动作并退出码 9。
  * ===================================================================== */
 #include <windows.h>
+#include "../common/nb_brand.h"   /* 品牌宏 */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -315,7 +316,7 @@ static int type_text(const char *ansi)
 /* ---------------- 命令分发 ---------------- */
 static void usage(void)
 {
-    printf("Axiom NeuroBench 2003 - Computer Use 工具\n"
+    printf(SM_PRODUCT_NAME " - Computer Use 工具\n"
            "用法: NBCU.EXE <命令> [参数]\n"
            "  size                        打印屏幕分辨率\n"
            "  shot <文件.bmp>             截屏保存\n"

@@ -23,8 +23,8 @@ th { background: #E0E0E0; }
 <H1>配置服务器与密钥</H1>
 
 <H2>配置文件在哪里</H2>
-<P>设置保存在程序目录下的 <CODE>NEBENCH.INI</CODE> 中。如果程序目录不可写，会自动
-改存到 <CODE>Application Data\9xHarness\NEBENCH.INI</CODE>。它是老式 INI 文件，
+<P>设置保存在程序目录下的 <CODE>9XHARNESS.INI</CODE> 中。如果程序目录不可写，会自动
+改存到 <CODE>Application Data\9xHarness\9XHARNESS.INI</CODE>。它是老式 INI 文件，
 可以用记事本直接修改：</P>
 <CODE>[connection]
 endpoint=https://api.deepseek.com/chat/completions
@@ -50,7 +50,7 @@ language=zh</CODE>
 <CODE>chat/completions</CODE> 接口，以 http:// 或 https:// 开头</TD></TR>
 <TR><TD>model</TD><TD>型号名称，由服务商规定</TD></TR>
 <TR><TD>apikey</TD><TD>密钥。保存时会做简单混淆（不是加密），请不要把
-NEBENCH.INI 发给别人</TD></TR>
+9XHARNESS.INI 发给别人</TD></TR>
 <TR><TD>temperature</TD><TD>温度 x10。7 表示 0.7，数值越大回答越活泼</TD></TR>
 <TR><TD>maxtokens</TD><TD>单次回答的令牌上限，老机器不建议超过 2048</TD></TR>
 <TR><TD>usetools</TD><TD>1 = 允许助手调用本机工具</TD></TR>

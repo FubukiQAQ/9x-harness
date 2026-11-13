@@ -1,11 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """SmartMate 2000 - 生成全部 16 色复古位图资源（图标/工具栏/启动画面/向导横幅）"""
+import io
 import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# ---- 品牌（tools/mkbrand.py 生成的摘要，取不到就用默认值）----
+def _brand():
+    import json
+    path = os.path.join(ROOT, "src", "common", "brand_summary.json")
+    if os.path.exists(path):
+        with io.open(path, encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+BRAND = _brand()
+B_NAME = BRAND.get("product", "9xHarness")
+B_SHORT = BRAND.get("short", B_NAME)
+B_COMPANY = BRAND.get("company", "Axiom Software")
+B_VERSION = BRAND.get("version", "3.00.2003")
 
 # 标准 16 色 VGA 调色板 —— 1990 年代的味道
 PAL = [
@@ -292,15 +308,18 @@ def make_splash(path):
     f1 = load_font(38, True)
     f2 = load_font(20)
     f3 = load_font(12)
-    d.text((26, 34), "Axiom", font=f1, fill=WHITE)
-    d.text((28, 78), "NeuroBench 2003", font=f2, fill=(220, 230, 255))
+    d.text((26, 30), B_NAME, font=f1, fill=WHITE)
+    if B_SHORT and B_SHORT != B_NAME:
+        d.text((28, 80), B_SHORT, font=f2, fill=(220, 230, 255))
+    else:
+        d.text((30, 84), "Version " + B_VERSION, font=f2, fill=(200, 215, 250))
     d.line([28, 106, 372, 106], fill=(180, 190, 230))
     d.text((28, 116), "Desktop assistant for legacy Windows", font=f3, fill=(210, 220, 240))
     d.text((28, 134), "Built-in SSL/TLS 1.2 - Tool calling - Win 95/98/2000/XP", font=f3, fill=(190, 200, 230))
     d.text((28, 166), "Starting, please wait...", font=f3, fill=(170, 180, 210))
     d.rectangle([28, 188, 372, 200], fill=(10, 10, 60), outline=(120, 130, 170))
     d.rectangle([30, 190, 210, 198], fill=(210, 220, 250))
-    d.text((28, 210), "Axiom Software   Version 3.00.2003", font=f3, fill=(160, 170, 210))
+    d.text((28, 210), B_COMPANY, font=f3, fill=(160, 170, 210))
     save_bmp8(path, im)
     return im
 
@@ -335,14 +354,12 @@ def make_setup_banner(path, w=164, h=314):
     f1 = load_font(22, True)
     f2 = load_font(16)
     f3 = load_font(11)
-    d.text((14, 20), "Axiom", font=f1, fill=WHITE)
-    d.text((14, 48), "NeuroBench", font=f2, fill=(200, 215, 255))
-    d.text((14, 70), "2003", font=f2, fill=(200, 215, 255))
-    d.line([14, 98, w - 14, 98], fill=(140, 160, 220))
-    d.text((14, 112), "Setup Wizard", font=f3, fill=(200, 210, 240))
-    d.text((14, 128), "InstallShield style", font=f3, fill=(160, 175, 215))
-    d.text((14, h - 66), "Axiom Software", font=f3, fill=(190, 200, 235))
-    d.text((14, h - 50), "Version 3.00.2003", font=f3, fill=(160, 175, 215))
+    d.text((14, 20), B_SHORT, font=f1, fill=WHITE)
+    d.line([14, 52, w - 14, 52], fill=(140, 160, 220))
+    d.text((14, 64), "Setup Wizard", font=f3, fill=(200, 210, 240))
+    d.text((14, 80), "InstallShield style", font=f3, fill=(160, 175, 215))
+    d.text((14, h - 66), B_COMPANY, font=f3, fill=(190, 200, 235))
+    d.text((14, h - 50), "Version " + B_VERSION, font=f3, fill=(160, 175, 215))
     d.text((14, h - 32), "(C) 1993-2003", font=f3, fill=(140, 155, 195))
     save_bmp8(path, im)
     return im

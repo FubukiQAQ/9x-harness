@@ -553,8 +553,8 @@ int sm_config_save(const SmConfig *c)
     char tmp[64];
     char enc[1024];
 
-    sm_ini_set(ini, "NeuroBench", "Product", SM_SHORT_NAME);
-    sm_ini_set(ini, "NeuroBench", "Version", SM_VERSION_STR);
+    sm_ini_set(ini, SM_SHORT_NAME, "Product", SM_SHORT_NAME);
+    sm_ini_set(ini, SM_SHORT_NAME, "Version", SM_VERSION_STR);
 
     sm_ini_set(ini, "connection", "endpoint", c->endpoint);
     sm_ini_set(ini, "connection", "model", c->model);

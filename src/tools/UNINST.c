@@ -111,7 +111,7 @@ static void do_uninstall(void)
     sm_free(data);
 
     DeleteFileA(lst);
-    DeleteFileA(sm_path_join(dir, "NEBENCH.INI"));
+    DeleteFileA(sm_path_join(dir, SM_INI_NAME));
     /* 最后清掉自己的目录（先删掉残余文件） */
     {
         char *pat = sm_path_join(dir, "*.*");
@@ -151,7 +151,8 @@ static LRESULT CALLBACK UninstProc(HWND h, UINT m, WPARAM w, LPARAM l)
             SetBkMode(dc, TRANSPARENT);
             SetTextColor(dc, RGB(255, 255, 255));
             SelectObject(dc, g_fontB);
-            TextOutA(dc, 12, 10, "Axiom NeuroBench 2003 卸载程序", 23);
+            TextOutA(dc, 12, 10, SM_PRODUCT_NAME " 卸载程序",
+             lstrlenA(SM_PRODUCT_NAME " 卸载程序"));
             SelectObject(dc, g_font);
             TextOutA(dc, 14, 28, TS("将删除本软件在您计算机上安装的全部文件",
            "Removes every file this program installed on your computer"), 20);
@@ -174,7 +175,7 @@ static LRESULT CALLBACK UninstProc(HWND h, UINT m, WPARAM w, LPARAM l)
             ShowWindow(g_prog, SW_SHOW);
             ShowWindow(g_step, SW_SHOW);
             do_uninstall();
-            MessageBoxA(h, "Axiom NeuroBench 2003 已从您的计算机上删除。\r\n\r\n"
+            MessageBoxA(h, SM_PRODUCT_NAME " 已从您的计算机上删除。\r\n\r\n"
                            "谢谢使用本软件。", "卸载", MB_ICONINFORMATION | MB_OK);
             DestroyWindow(h);
             return 0;
@@ -280,8 +281,8 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
     RegisterClassA(&wc);
 
     h = CreateWindowExA(WS_EX_DLGMODALFRAME, "NeuroBenchUninst",
-                        TS("NeuroBench 2003 卸载",
-           "Uninstall NeuroBench 2003"),
+                        TS(SM_SHORT_NAME " 卸载",
+           "Uninstall " SM_SHORT_NAME_EN),
                         WS_POPUP | WS_CAPTION | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT,
                         420, 300, NULL, NULL, inst, NULL);
     if (!h) return 1;

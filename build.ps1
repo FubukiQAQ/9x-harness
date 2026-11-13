@@ -154,10 +154,18 @@ foreach ($s in $commonSrc) {
 # ---------------------------------------------------------------------
 Step "生成位图资源"
 $artStamp = "$ObjDir\.art"
+$artTag = "$($BrandSum.product)|$($BrandSum.company)|$($BrandSum.version)"
 $needArt = $true
-if (Test-Path "$Root\src\agent\res\toolbar.bmp") { $needArt = $false }
-if ($needArt) { & $Py "$Root\tools\mkart.py" | Out-Null }
-else { Log "已存在位图资源，跳过（删除 src\*\res\*.bmp 可重新生成）" }
+if ((Test-Path "$Root\src\agent\res\toolbar.bmp") -and (Test-Path $artStamp)) {
+    if ((Get-Content $artStamp -Raw).Trim() -eq $artTag) { $needArt = $false }
+}
+if ($needArt) {
+    & $Py "$Root\tools\mkart.py" | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "mkart failed" }
+    Set-Content $artStamp $artTag -Encoding UTF8
+} else {
+    Log "位图资源与品牌一致，跳过（删除 build\obj\.art 可强制重画）"
+}
 
 # ---------------------------------------------------------------------
 function Build-App {

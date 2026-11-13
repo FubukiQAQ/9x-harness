@@ -171,8 +171,8 @@ static LRESULT CALLBACK CertProc(HWND h, UINT m, WPARAM w, LPARAM l)
             TextOutA(dc, 10, 8, TS("根证书更新程序",
            "Root Certificate Update"), 14);
             SelectObject(dc, g_font);
-            TextOutA(dc, 12, 24, TS("NeuroBench 2003 附加组件",
-           "Axiom NeuroBench 2003 add-on"), 22);
+            TextOutA(dc, 12, 24, TS(SM_PRODUCT_NAME " 附加组件",
+        SM_PRODUCT_NAME_EN " add-on"), 22);
         }
         EndPaint(h, &ps);
         return 0;

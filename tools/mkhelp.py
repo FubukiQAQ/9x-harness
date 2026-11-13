@@ -15,6 +15,7 @@
 
 用法: py mkhelp.py [--check]
 """
+import io
 import os
 import shutil
 import sys
@@ -87,6 +88,22 @@ def all_pages():
             yield f, t
 
 
+def _brand(text):
+    """目录/索引里的品牌名跟 brand.ini 走。"""
+    import json
+    path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                        "src", "common", "brand_summary.json")
+    if not os.path.exists(path):
+        return text
+    with io.open(path, encoding="utf-8") as f:
+        b = json.load(f)
+    short = b.get("short", "NeuroBench 2003")
+    out = text.replace("Axiom NeuroBench 2003", b.get("product", "Axiom NeuroBench 2003"))
+    out = out.replace("NeuroBench 2003", short)
+    out = out.replace("NeuroBench", short)
+    return out
+
+
 def write_toc():
     t = ['<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">',
          '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=gb2312">',
@@ -111,7 +128,7 @@ def write_toc():
     t.append('</UL>')
     t.append('</BODY></HTML>')
     with open(os.path.join(OUT, "toc.hhc"), "wb") as f:
-        f.write("\r\n".join(t).encode(ENC, "replace"))
+        f.write(_brand("\r\n".join(t)).encode(ENC, "replace"))
 
 
 def write_index():
@@ -128,7 +145,7 @@ def write_index():
     t.append('</UL>')
     t.append('</BODY></HTML>')
     with open(os.path.join(OUT, "index.hhk"), "wb") as f:
-        f.write("\r\n".join(t).encode(ENC, "replace"))
+        f.write(_brand("\r\n".join(t)).encode(ENC, "replace"))
 
 
 def main():

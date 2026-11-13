@@ -657,7 +657,7 @@ static void do_saveas_conv(void)
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
     ofn.hwndOwner = g.hFrame;
-    ofn.lpstrFilter = "NeuroBench conversation (*.nbc)\0*.nbc\0Text files (*.txt)\0*.txt\0All files (*.*)\0*.*\0";
+    ofn.lpstrFilter = SM_SHORT_NAME " conversation (*.nbc)\0*.nbc\0Text files (*.txt)\0*.txt\0All files (*.*)\0*.*\0";
     ofn.lpstrFile = path;
     ofn.nMaxFile = MAX_PATH;
     ofn.lpstrDefExt = "nbc";
@@ -699,7 +699,7 @@ static void do_open_conv(void)
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
     ofn.hwndOwner = g.hFrame;
-    ofn.lpstrFilter = "NeuroBench conversation (*.nbc)\0*.nbc\0Text files (*.txt)\0*.txt\0All files (*.*)\0*.*\0";
+    ofn.lpstrFilter = SM_SHORT_NAME " conversation (*.nbc)\0*.nbc\0Text files (*.txt)\0*.txt\0All files (*.*)\0*.*\0";
     ofn.lpstrFile = path;
     ofn.nMaxFile = MAX_PATH;
     ofn.Flags = OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST;
@@ -728,10 +728,10 @@ static void do_ws_new(void)
         _snprintf(m, sizeof(m),
             TS("无法创建工作区「%s」。\r\n\r\n"
                "可能是名字含 \ / : * ? \" < > | 之类的字符，或者没有写权限。\r\n"
-               "详细信息见安装目录下的 NEUROBENCH.LOG。",
+               "详细信息见安装目录下的 " SM_EXE_BASE ".LOG。",
                "Cannot create the workspace \"%s\".\r\n\r\n"
                "The name may contain invalid characters, or the folder is not writable.\r\n"
-               "See NEUROBENCH.LOG for details."), name);
+               "See " SM_EXE_BASE ".LOG for details."), name);
         m[sizeof(m) - 1] = 0;
         MessageBoxA(g.hFrame, m, SM_SHORT_NAME, MB_ICONWARNING | MB_OK);
         sm_logf("ws_new: ws_create failed");

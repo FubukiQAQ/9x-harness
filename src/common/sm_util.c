@@ -545,7 +545,7 @@ void sm_logf(const char *fmt, ...)
     if (!g_log_path[0]) {
         char *d = sm_app_dir();
         if (d && d[0]) {
-            _snprintf(g_log_path, sizeof(g_log_path) - 1, "%sNEUROBENCH.LOG", d);
+            _snprintf(g_log_path, sizeof(g_log_path) - 1, "%s" SM_EXE_BASE ".LOG", d);
             g_log_path[sizeof(g_log_path) - 1] = 0;
             f = fopen(g_log_path, "a");
             if (!f) g_log_path[0] = 0;
@@ -556,12 +556,12 @@ void sm_logf(const char *fmt, ...)
             char tmp[MAX_PATH + 2];
             tmp[0] = 0;
             if (GetTempPathA(MAX_PATH, tmp) && tmp[0]) {
-                _snprintf(g_log_path, sizeof(g_log_path) - 1, "%sNEUROBENCH.LOG", tmp);
+                _snprintf(g_log_path, sizeof(g_log_path) - 1, "%s" SM_EXE_BASE ".LOG", tmp);
                 g_log_path[sizeof(g_log_path) - 1] = 0;
                 f = fopen(g_log_path, "a");
             }
             if (!f) {
-                strcpy(g_log_path, "C:\\NEUROBENCH.LOG");
+                strcpy(g_log_path, "C:\\" SM_EXE_BASE ".LOG");
                 f = fopen(g_log_path, "a");
             }
             if (!f) { g_log_path[0] = 0; return; }

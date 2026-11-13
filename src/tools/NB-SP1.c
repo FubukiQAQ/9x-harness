@@ -91,7 +91,7 @@ static void do_patch(void)
         if (!sm_file_exists(probe)) {
             char m[MAX_PATH + 200];
             _snprintf(m, sizeof(m),
-                      "在下面的文件夹中没有找到 NEUROBENCH.EXE：\r\n\r\n%s\r\n\r\n"
+                      "在下面的文件夹中没有找到 " SM_EXE_NAME "：\r\n\r\n%s\r\n\r\n"
                       "请确认这是 " SM_SHORT_NAME " 的安装目录。", g_target);
             m[sizeof(m) - 1] = 0;
             MessageBoxA(g_win, m, TS("服务包",
@@ -115,8 +115,8 @@ static void do_patch(void)
 
     if (ok) {
         ini = sm_path_join(g_target, SM_INI_NAME);
-        sm_ini_set(ini, "NeuroBench", "ServicePack", "1");
-        sm_ini_set(ini, "NeuroBench", "Version", "3.01.2003");
+        sm_ini_set(ini, SM_SHORT_NAME, "ServicePack", "1");
+        sm_ini_set(ini, SM_SHORT_NAME, "Version", "3.01.2003");
         sm_free(ini);
         if (g_prog) SendMessageA(g_prog, PBM_SETPOS, 100, 0);
         if (g_step) SetWindowTextA(g_step, "服务包 1 安装完成。");
