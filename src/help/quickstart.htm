@@ -1,0 +1,62 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>快速安装与使用</TITLE>
+<STYLE type="text/css">
+body { font-family: 宋体, SimSun, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: 新宋体, NSimSun, monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;帮助 &nbsp;版本 3.00.2003</DIV>
+
+<H1>快速安装与使用</H1>
+
+<H2>第一步：启动程序</H2>
+<P>从「开始 - 程序 - 9xHarness」中单击 <B>9xHarness</B>，或者双击桌面上
+的图标。启动时会显示一个启动画面，稍等一两秒即可。</P>
+
+<H2>第二步：填写服务器信息</H2>
+<P>选择菜单「工具 - 设置」，填写：</P>
+<TABLE>
+<TR><TH>项目</TH><TH>说明</TH></TR>
+<TR><TD>服务器地址</TD><TD>完整的接口地址，例如
+<CODE>https://api.deepseek.com/chat/completions</CODE></TD></TR>
+<TR><TD>型号名称</TD><TD>服务商规定的型号，例如 <CODE>deepseek-chat</CODE></TD></TR>
+<TR><TD>API 密钥</TD><TD>服务商给您的密钥，通常以 <CODE>sk-</CODE> 开头</TD></TR>
+<TR><TD>超时(秒)</TD><TD>老机器建议填 <B>60</B></TD></TR>
+<TR><TD>最长输出</TD><TD>一次回答最多多少令牌，建议 <B>1024</B>~<B>2048</B></TD></TR>
+</TABLE>
+<P>填好后按<B>「测试连接」</B>。提示“网络、加密与鉴权全部正常”就说明可以用了。</P>
+
+<H2>第三步：开始对话</H2>
+<P>在右栏下方的输入框里输入问题，然后按 <B>Ctrl+Enter</B> 或单击<B>「发送」</B>。
+等待时状态栏会显示“正在连接服务器...”，按钮暂时变灰。要中途放弃，按 <B>Esc</B>
+或单击「停止」。</P>
+
+<H2>第四步：让它动手做事</H2>
+<P>先确认窗口下方的<B>「允许智能助手调用本机工具」</B>已勾选，然后可以这样问：</P>
+<CODE>帮我看看 D:\ 下面有哪些文件夹
+把工作区里的 notes.txt 读出来，把错别字改一下再存回去
+写一个自动备份 D:\工作 的批处理，存到 C:\BACKUP.BAT
+这台电脑内存多大？还能装点什么？</CODE>
+<P>每当助手要写文件或执行命令，都会弹出确认框，您可以选择“否”。</P>
+
+<DIV class="warn"><B>注意：</B>云端回答并不总是正确。涉及删除文件、修改系统设置的
+命令，请务必自己看过再同意执行。</DIV>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;版本 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+本帮助文件随软件一同安装，可用「帮助 - 帮助目录」再次打开。</P>
+</BODY></HTML>

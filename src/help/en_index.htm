@@ -1,0 +1,72 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<TITLE>9xHarness Help</TITLE>
+<STYLE type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: "Courier New", monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;Help &nbsp;Version 3.00.2003</DIV>
+
+<H1>9xHarness</H1>
+<P><B>A desktop assistant for old machines.</B></P>
+<P>9xHarness is a desktop assistant for legacy PCs (Windows 95 / 98 /
+NT 4.0 / 2000 / XP). It sends your question over an encrypted connection to a cloud
+service and shows the answer in this plain three-pane workbench. It can also read and
+write files on this computer, run commands and report system information - that is
+what "tool calling" means here.</P>
+
+<H2>Three things that make it unusual</H2>
+<UL>
+<LI><B>Secure connections on old systems.</B> Windows XP only speaks TLS 1.0, which
+modern servers refuse. NeuroBench carries its own SSL/TLS 1.2 stack (BearSSL), so it
+does not depend on any operating-system crypto service and works even on Windows 95.</LI>
+<LI><B>It knows it lives on an old machine.</B> The instructions sent to the cloud
+describe this host: Windows XP, 128-512 MB RAM, code page 936, no PowerShell, no
+Python, IE6 only. Answers therefore fit the machine instead of suggesting software
+you cannot install.</LI>
+<LI><B>It can actually get work done.</B> List folders, read and write files, run
+commands, open documents and put text on the clipboard. Anything risky asks for
+confirmation first.</LI>
+</UL>
+
+<H2>Before you start</H2>
+<OL>
+<LI>Open <B>Tools - Options</B> and fill in the server URL, model name and API key,
+then press <B>Test connection</B>.</LI>
+<LI>Open <B>Tools - Activate Product</B> and enter the product key from your disc
+sleeve. Without a key the program runs as a 30-day / 30-conversation trial.</LI>
+</OL>
+
+<DIV class="note"><B>Note:</B> this program ships no cloud account of its own. Ask
+your supplier for the server URL and key.</DIV>
+
+<H2>In this help file</H2>
+<UL>
+<LI><A HREF="en_quickstart.htm">Quick start</A> - talking to it in five minutes</LI>
+<LI><A HREF="en_settings.htm">Server and key settings</A></LI>
+<LI><A HREF="en_tools.htm">Tool calling</A> - what it may do to this computer</LI>
+<LI><A HREF="en_workspace.htm">Workspaces and files</A></LI>
+<LI><A HREF="en_activate.htm">Activation and trial</A></LI>
+<LI><A HREF="en_editor.htm">The built-in text editor</A></LI>
+<LI><A HREF="en_faq.htm">Troubleshooting</A></LI>
+<LI><A HREF="en_history.htm">Version history</A></LI>
+</UL>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;Version 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+This help file is installed with the program; reopen it with Help - Help Topics.</P>
+</BODY></HTML>

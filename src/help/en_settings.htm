@@ -1,0 +1,83 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<TITLE>Server and key settings</TITLE>
+<STYLE type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: "Courier New", monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;Help &nbsp;Version 3.00.2003</DIV>
+
+<H1>Server and key settings</H1>
+
+<H2>Where settings live</H2>
+<P>Settings are stored in <CODE>NEBENCH.INI</CODE> in the program folder. If that
+folder is read-only the file goes to
+<CODE>Application Data\9xHarness\NEBENCH.INI</CODE> instead. It is a plain INI file
+and can be edited in Notepad:</P>
+<CODE>[connection]
+endpoint=https://api.deepseek.com/chat/completions
+model=deepseek-chat
+apikey=(stored lightly obfuscated)
+temperature=7
+maxtokens=2048
+timeout=60
+
+[options]
+usetools=1
+confirmwrite=1
+ignorecertdate=0
+
+[display]
+fontsize=12
+language=en</CODE>
+
+<H2>Meaning of each value</H2>
+<TABLE>
+<TR><TH>Key</TH><TH>Meaning</TH></TR>
+<TR><TD>endpoint</TD><TD>Full URL of an OpenAI-compatible
+<CODE>chat/completions</CODE> endpoint; must start with http:// or https://</TD></TR>
+<TR><TD>model</TD><TD>Model name as required by your provider</TD></TR>
+<TR><TD>apikey</TD><TD>Your key. It is obfuscated, not encrypted - do not share
+NEBENCH.INI</TD></TR>
+<TR><TD>temperature</TD><TD>Temperature x10 (7 = 0.7)</TD></TR>
+<TR><TD>maxtokens</TD><TD>Answer length limit; keep it modest on old machines</TD></TR>
+<TR><TD>usetools</TD><TD>1 = the assistant may use local tools</TD></TR>
+<TR><TD>confirmwrite</TD><TD>1 = always ask before writing files or running commands</TD></TR>
+<TR><TD>ignorecertdate</TD><TD>1 = ignore certificate date errors (only if the clock
+is wrong)</TD></TR>
+<TR><TD>language</TD><TD>zh or en - the user interface language</TD></TR>
+</TABLE>
+
+<H2>About the secure connection</H2>
+<P>NeuroBench verifies server certificates against the root certificates in the
+<CODE>CERTS</CODE> folder. If a server switches to a new certificate authority the
+program reports "server certificate not trusted"; run <B>CERTUPD.EXE</B> from the tools
+disc, or drop a new PEM bundle into <CODE>CERTS</CODE>.</P>
+
+<DIV class="note"><B>Wrong clock?</B> A dead CMOS battery is common on these machines
+and makes certificate dates fail. Fix the system clock first; if you cannot, tick
+"Ignore certificate date errors" and the program will try to correct the time from the
+network.</DIV>
+
+<H2>Proxy servers</H2>
+<P>HTTP proxies are not supported. If your network needs one, ask your administrator to
+allow direct outbound access to port 443.</P>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;Version 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+This help file is installed with the program; reopen it with Help - Help Topics.</P>
+</BODY></HTML>

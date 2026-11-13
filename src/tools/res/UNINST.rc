@@ -1,0 +1,15 @@
+/* 卸载程序资源脚本 */
+#include <windows.h>
+#include "../../common/brand_res.h"
+
+#ifdef BRAND_ICON_UNINST
+101 ICON BRAND_ICON_UNINST
+#else
+101 ICON "uninst.ico"
+#endif
+
+#define BRAND_INTERNAL  "UNINST"
+#define BRAND_ORIGNAME  "UNINST.EXE"
+#define BRAND_FILEDESC  "Uninstaller"
+
+#include "../../common/brand_rc.inc"

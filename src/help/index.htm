@@ -1,0 +1,69 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>9xHarness 帮助</TITLE>
+<STYLE type="text/css">
+body { font-family: 宋体, SimSun, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: 新宋体, NSimSun, monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;帮助 &nbsp;版本 3.00.2003</DIV>
+
+<H1>9xHarness</H1>
+<P><B>老机器上的桌面智能助手。</B></P>
+<P>9xHarness 是一个运行在老式个人电脑（Windows 95 / 98 / NT 4.0 /
+2000 / XP）上的桌面助手。它把您的提问通过加密的安全连接发送到云端服务，再把回答
+显示在这个三栏工作台里；它还可以读写您电脑上的文件、执行命令、查看系统信息——
+也就是所谓“工具调用”。</P>
+
+<H2>三个特点</H2>
+<UL>
+<LI><B>在老系统上也能安全上网。</B>Windows XP 自带的加密组件只支持到 TLS 1.0，
+早就不能用了。本程序内置完整的 SSL/TLS 1.2 组件（BearSSL），不依赖系统里的任何
+加密服务，因此在 Windows 95 上一样能和现代服务器建立安全连接。</LI>
+<LI><B>明白自己住在旧机器里。</B>程序发给云端的环境说明是专门写过的：它知道这台
+电脑是 Windows XP、内存只有 128~512 MB、编码是 GBK、没有 PowerShell 也没有
+Python。于是回答更贴合实际，不会让您去装那些根本装不上的现代软件。</LI>
+<LI><B>一个真正能干活的助手。</B>列目录、读文件、写文件、在命令提示符里执行命令、
+打开文件、把文字放进剪贴板。所有有风险的操作都会先弹出确认框。</LI>
+</UL>
+
+<H2>开始之前</H2>
+<OL>
+<LI>在「工具 - 设置」里填写<B>服务器地址</B>、<B>型号名称</B>与<B>API 密钥</B>，
+然后按「测试连接」确认网络与加密通信正常；</LI>
+<LI>在「工具 - 激活产品」里输入随光盘提供的<B>产品序列号（CDK）</B>。未激活时
+可以使用 30 天 / 30 次会话的试用版。</LI>
+</OL>
+
+<DIV class="note"><B>提示：</B>本软件本身不包含任何云端账号。如果您不清楚服务器
+地址和密钥，请向提供本软件的单位或经销商索取。</DIV>
+
+<H2>本帮助文件的内容</H2>
+<UL>
+<LI><A HREF="quickstart.htm">快速安装与使用</A></LI>
+<LI><A HREF="settings.htm">配置服务器与密钥</A></LI>
+<LI><A HREF="tools.htm">工具调用说明</A></LI>
+<LI><A HREF="workspace.htm">工作区与文件</A></LI>
+<LI><A HREF="activate.htm">激活与试用</A></LI>
+<LI><A HREF="editor.htm">内置文本编辑器</A></LI>
+<LI><A HREF="faq.htm">常见问题</A></LI>
+<LI><A HREF="history.htm">版本历史</A></LI>
+</UL>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;版本 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+本帮助文件随软件一同安装，可用「帮助 - 帮助目录」再次打开。</P>
+</BODY></HTML>

@@ -1,0 +1,62 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>工作区与文件</TITLE>
+<STYLE type="text/css">
+body { font-family: 宋体, SimSun, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: 新宋体, NSimSun, monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;帮助 &nbsp;版本 3.00.2003</DIV>
+
+<H1>工作区与文件</H1>
+
+<H2>三个窗格分别是什么</H2>
+<TABLE>
+<TR><TH>窗格</TH><TH>用途</TH></TR>
+<TR><TD>左：工作区搜索 / 工作区列表</TD><TD>搜索并选择工作区。每个工作区就是磁盘上的
+一个文件夹。</TD></TR>
+<TR><TD>中：文件搜索 / 当前工作区内的文件</TD><TD>当前工作区文件夹里的文件。双击文本
+文件用内置编辑器打开；双击会话文件（*.NBC）则载入该会话。</TD></TR>
+<TR><TD>右：对话消息 / 输入</TD><TD>对话记录与输入框。</TD></TR>
+</TABLE>
+
+<H2>工作区是什么</H2>
+<P>每个工作区是 <CODE>Application Data\9xHarness\Workspaces\&lt;名称&gt;</CODE>
+下的一个文件夹。您在这个工作区里的对话会按文件夹收纳，文件名形如
+<CODE>CONV-20031118-1432.NBC</CODE>，与您放在里面的文本文件并列存放。切换工作区会
+同时切换对话历史和文件列表。</P>
+
+<H2>常用操作</H2>
+<UL>
+<LI><B>工作区 - 新建工作区</B>：建立文件夹并切换过去。</LI>
+<LI><B>工作区 - 在工作区中新建文本文件</B>：新建并立即用编辑器打开。</LI>
+<LI><B>工作区 - 把文件加入工作区</B>：把别处的文件复制进来。</LI>
+<LI><B>工作区 - 打开工作区文件夹</B>：在资源管理器中打开。</LI>
+<LI><B>F5</B> 或 <B>工作区 - 刷新</B>：重新读取文件夹。</LI>
+<LI>在文件树上按鼠标右键，可以“打开 / 删除 / 刷新”。</LI>
+</UL>
+
+<H2>会话文件</H2>
+<P>会话文件是带几行 <CODE>;</CODE> 表头的纯文本，可以直接用记事本或内置编辑器查看。
+<B>文件 - 保存会话</B> 会把当前对话写入该文件；在文件树上删除会话文件即从磁盘删除。</P>
+
+<DIV class="note"><B>建议：</B>一个项目用一个工作区。这样助手为该项目生成的所有东西
+都在同一个文件夹里，方便整体复制到软盘或打成压缩包。</DIV>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;版本 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+本帮助文件随软件一同安装，可用「帮助 - 帮助目录」再次打开。</P>
+</BODY></HTML>

@@ -1,0 +1,63 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<TITLE>The built-in text editor</TITLE>
+<STYLE type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: "Courier New", monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;Help &nbsp;Version 3.00.2003</DIV>
+
+<H1>The built-in text editor</H1>
+<P>NeuroBench includes a small text editor for the files the assistant produces -
+batch files, notes, configuration files - without needing anything beyond Notepad.</P>
+
+<H2>Opening it</H2>
+<UL>
+<LI><B>File - Text Editor</B>, or the third toolbar button;</LI>
+<LI>double-click any text file in the workspace file tree;</LI>
+<LI><B>Workspace - New Text File in Workspace</B> creates and opens one.</LI>
+</UL>
+
+<H2>Features</H2>
+<TABLE>
+<TR><TH>Menu</TH><TH>Action</TH><TH>Shortcut</TH></TR>
+<TR><TD>File - New</TD><TD>Empty document</TD><TD>Ctrl+N</TD></TR>
+<TR><TD>File - Open</TD><TD>Open a text file</TD><TD>Ctrl+O</TD></TR>
+<TR><TD>File - Save</TD><TD>Save to the same file</TD><TD>Ctrl+S</TD></TR>
+<TR><TD>Edit - Undo</TD><TD>Undo</TD><TD>Ctrl+Z</TD></TR>
+<TR><TD>Edit - Find</TD><TD>Standard Find dialog</TD><TD>Ctrl+F</TD></TR>
+<TR><TD>Edit - Insert Date/Time</TD><TD>Insert current date and time</TD><TD>F5</TD></TR>
+<TR><TD>Format - Word Wrap</TD><TD>Toggle wrapping</TD><TD>-</TD></TR>
+<TR><TD>Format - Font</TD><TD>Choose font and size</TD><TD>-</TD></TR>
+</TABLE>
+
+<H2>Encoding</H2>
+<P>The editor reads and writes <B>ANSI (GBK on Chinese systems)</B>, like every program
+of this era, so the files it writes are understood by cmd.exe and Notepad.</P>
+<P>UTF-8 files will show garbled Chinese. That is expected: open them in Notepad,
+choose Save As and pick ANSI.</P>
+
+<H2>Writing batch files</H2>
+<P>Save as ANSI and begin with:</P>
+<CODE>@echo off
+chcp 936
+</CODE>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;Version 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+This help file is installed with the program; reopen it with Help - Help Topics.</P>
+</BODY></HTML>

@@ -1,0 +1,3 @@
+mkchm test document
+line two: 0123456789
+line three: ABCDEFGHIJKLMNOPQRSTUVWXYZ

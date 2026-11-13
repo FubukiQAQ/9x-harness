@@ -1,0 +1,15 @@
+/* CDK 生成器资源脚本（品牌注入版） */
+#include <windows.h>
+#include "../../common/brand_res.h"
+
+#ifdef BRAND_ICON_KEYGEN
+101 ICON BRAND_ICON_KEYGEN
+#else
+101 ICON "keygen.ico"
+#endif
+
+#define BRAND_INTERNAL  "CDKEY"
+#define BRAND_ORIGNAME  "CDKEY.EXE"
+#define BRAND_FILEDESC  "Product key generator"
+
+#include "../../common/brand_rc.inc"

@@ -1,0 +1,72 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>常见问题</TITLE>
+<STYLE type="text/css">
+body { font-family: 宋体, SimSun, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: 新宋体, NSimSun, monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;帮助 &nbsp;版本 3.00.2003</DIV>
+
+<H1>常见问题</H1>
+
+<H3>1. 启动时提示“找不到根证书（CERTS 文件夹为空或缺失）”</H3>
+<P>安装目录下的 <CODE>CERTS</CODE> 文件夹被删掉了，或里面的证书文件丢失。请重新
+安装，或运行工具光盘中的 <B>CERTUPD.EXE</B> 导入证书包。</P>
+
+<H3>2. 提示“无法解析服务器地址”</H3>
+<P>依次检查：网线或调制解调器是否连好；能否用浏览器打开任意网页；服务器地址是否
+抄错（注意不要多打空格）；域名服务器（DNS）设置是否正确。</P>
+
+<H3>3. 提示“与服务器建立安全连接失败”</H3>
+<UL>
+<LI>先看系统时间对不对——时间错了证书校验必然失败；</LI>
+<LI>确认服务器地址以 <CODE>https://</CODE> 开头；</LI>
+<LI>如果提示“证书不受信任”，运行 CERTUPD.EXE 更新根证书；</LI>
+<LI>如果提示“没有双方都支持的加密套件”，说明该服务器只接受 TLS 1.3，
+本程序无法连接，请改用支持 TLS 1.2 的接口。</LI>
+</UL>
+
+<H3>4. 提示“服务器拒绝了请求（HTTP 401）”</H3>
+<P>密钥不对、已失效或余额不足。请到服务商网站检查。</P>
+
+<H3>5. 回答里出现奇怪的方块或问号</H3>
+<P>这是字体问题。请确认系统里装有“宋体”，也可以在「工具 - 设置」里把字号调大。</P>
+
+<H3>6. 助手说“我无法访问互联网”</H3>
+<P>这是正常的：助手本身不上网，只能通过本程序与云端通信，并且只能通过工具查看您
+电脑上的文件。要它看网页内容，请把内容复制粘贴进输入框。</P>
+
+<H3>7. 程序在 Windows 98 上能运行吗？</H3>
+<P>可以。本程序是 32 位程序，不依赖 .NET、不依赖现代运行库，Windows 95 OSR2 及以上
+装有 IE4 的系统都能运行。不过内存很小时，请把「最长输出」调到 512 以下。</P>
+
+<H3>8. 对话记录存在哪里？</H3>
+<P>存在当前工作区的文件夹里，是 <CODE>.NBC</CODE> 文本文件。每轮回答结束后会自动
+保存；「文件 - 保存会话」可以立即保存。</P>
+
+<H3>9. 为什么每次发送都要等很久？</H3>
+<P>老机器的 CPU 要自己做加密运算（没有硬件加速），加上带宽有限，一次问答 5~20 秒
+是正常的。把「最长输出」调小可以快一些。</P>
+
+<H3>10. 怎样完全卸载？</H3>
+<P>使用「开始 - 程序 - 9xHarness - 卸载 9xHarness」，或「控制面板 -
+添加/删除程序」。卸载程序会删除程序文件和快捷方式，但不会动您自己的文档和工作区。</P>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;版本 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+本帮助文件随软件一同安装，可用「帮助 - 帮助目录」再次打开。</P>
+</BODY></HTML>

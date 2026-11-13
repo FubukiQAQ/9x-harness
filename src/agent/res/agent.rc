@@ -1,0 +1,17 @@
+/* 主程序资源脚本
+ * 图标与版本信息来自品牌文件（tools/mkbrand.py 生成）。
+ * 本文件只用 ASCII；中文界面文字全在 C 源码里。 */
+#include <windows.h>
+#include "../../common/brand_res.h"
+
+#ifdef BRAND_ICON_AGENT
+101 ICON    BRAND_ICON_AGENT
+#else
+101 ICON    "agent.ico"
+#endif
+
+201 BITMAP  "toolbar.bmp"
+202 BITMAP  "splash.bmp"
+203 BITMAP  "banner.bmp"
+
+#include "../../common/brand_rc.inc"

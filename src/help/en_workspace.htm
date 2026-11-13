@@ -1,0 +1,66 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<TITLE>Workspaces and files</TITLE>
+<STYLE type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: "Courier New", monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;Help &nbsp;Version 3.00.2003</DIV>
+
+<H1>Workspaces and files</H1>
+
+<H2>The three panes</H2>
+<TABLE>
+<TR><TH>Pane</TH><TH>Purpose</TH></TR>
+<TR><TD>Workspace search / Workspaces (left)</TD><TD>Search and choose a workspace.
+Each workspace is a folder on disk.</TD></TR>
+<TR><TD>File search / Files in workspace (middle)</TD><TD>The files inside the current
+workspace folder. Double-click a text file to open it in the built-in editor;
+double-click a conversation (*.NBC) to load it.</TD></TR>
+<TR><TD>Conversation / Input (right)</TD><TD>The transcript and the box you type in.</TD></TR>
+</TABLE>
+
+<H2>What a workspace is</H2>
+<P>Every workspace is a folder under
+<CODE>Application Data\9xHarness\Workspaces\&lt;name&gt;</CODE>. Conversations you
+have in that workspace are saved there as <CODE>CONV-yyyymmdd-hhmmss.NBC</CODE>, next to
+any text files you put there. Switching workspace switches the conversation history and
+the file list.</P>
+
+<H2>Everyday operations</H2>
+<UL>
+<LI><B>Workspace - New Workspace</B> creates a folder and selects it.</LI>
+<LI><B>Workspace - New Text File in Workspace</B> creates a file and opens it.</LI>
+<LI><B>Workspace - Add File to Workspace</B> copies a file into the current folder.</LI>
+<LI><B>Workspace - Open Workspace Folder</B> opens the folder in Explorer.</LI>
+<LI><B>F5</B> or <B>Workspace - Refresh</B> re-reads the folder from disk.</LI>
+<LI>Right-click a file in the tree for Open / Delete / Refresh.</LI>
+</UL>
+
+<H2>Conversation files</H2>
+<P>Conversations are plain text with a short <CODE>;</CODE> header. They can be opened
+in Notepad or the built-in editor, and they are what <B>File - Save Conversation</B>
+writes. Deleting a conversation file from the tree deletes it from disk.</P>
+
+<DIV class="note"><B>Tip:</B> keep one workspace per project. Everything the assistant
+produces for that project then lands in one folder you can copy to a floppy or a ZIP
+archive.</DIV>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;Version 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+This help file is installed with the program; reopen it with Help - Help Topics.</P>
+</BODY></HTML>

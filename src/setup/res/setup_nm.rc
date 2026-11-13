@@ -1,0 +1,16 @@
+/* 安装程序资源脚本（无应用程序清单，发行用；XP 兼容性更好） */
+#include <windows.h>
+#include "../../common/brand_res.h"
+
+101 BITMAP "banner.bmp"
+#ifdef BRAND_ICON_SETUP
+102 ICON   BRAND_ICON_SETUP
+#else
+102 ICON   "setup.ico"
+#endif
+
+#define BRAND_INTERNAL  "SETUP"
+#define BRAND_ORIGNAME  "SETUP.EXE"
+#define BRAND_FILEDESC  "Setup program"
+
+#include "../../common/brand_rc.inc"

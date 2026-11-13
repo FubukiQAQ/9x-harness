@@ -1,0 +1,12 @@
+{
+  "product": "9xHarness",
+  "short": "9xHarness",
+  "company": "Axiom Software",
+  "version": "3.00.2003",
+  "exe": "9XHARNESS",
+  "slug": "9XHARNESS",
+  "iso_label": "9XHARNESS",
+  "iso_label_tools": "9XHARNESSTOOLS",
+  "install_subdir": "9xHarness",
+  "menu_group": "9xHarness"
+}

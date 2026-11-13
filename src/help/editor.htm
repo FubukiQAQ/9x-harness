@@ -1,0 +1,63 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>内置文本编辑器</TITLE>
+<STYLE type="text/css">
+body { font-family: 宋体, SimSun, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: 新宋体, NSimSun, monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;帮助 &nbsp;版本 3.00.2003</DIV>
+
+<H1>内置文本编辑器</H1>
+<P>NeuroBench 自带一个小巧的文本编辑器，用来查看和修改助手生成的文件，比如批处理
+脚本、说明文字。它不需要另外安装任何东西。</P>
+
+<H2>打开方法</H2>
+<UL>
+<LI>菜单「文件 - 文本编辑器」，或工具栏第三个按钮；</LI>
+<LI>在中栏的文件树里双击文本文件；</LI>
+<LI>「工作区 - 在工作区中新建文本文件」会新建并立即打开。</LI>
+</UL>
+
+<H2>功能</H2>
+<TABLE>
+<TR><TH>菜单</TH><TH>功能</TH><TH>快捷键</TH></TR>
+<TR><TD>文件 - 新建</TD><TD>清空并开始新文档</TD><TD>Ctrl+N</TD></TR>
+<TR><TD>文件 - 打开</TD><TD>打开一个文本文件</TD><TD>Ctrl+O</TD></TR>
+<TR><TD>文件 - 保存</TD><TD>保存到原文件</TD><TD>Ctrl+S</TD></TR>
+<TR><TD>编辑 - 撤消</TD><TD>撤消上一步</TD><TD>Ctrl+Z</TD></TR>
+<TR><TD>编辑 - 查找</TD><TD>系统标准的查找对话框</TD><TD>Ctrl+F</TD></TR>
+<TR><TD>编辑 - 插入日期时间</TD><TD>插入当前日期时间</TD><TD>F5</TD></TR>
+<TR><TD>格式 - 自动换行</TD><TD>开关自动换行</TD><TD>—</TD></TR>
+<TR><TD>格式 - 字体</TD><TD>选择字体与字号</TD><TD>—</TD></TR>
+</TABLE>
+
+<H2>编码说明</H2>
+<P>编辑器以<B>ANSI（简体中文系统即 GBK）</B>读写文件，与那个年代的程序保持一致，
+写出的 .bat、.ini、.txt 可以被 cmd.exe 和记事本正确识别。</P>
+<P>如果您打开的文件是 UTF-8 编码，中文可能显示为乱码。这是正常现象——用记事本
+“另存为”并选择 ANSI 编码即可转换。</P>
+
+<H2>写批处理的小技巧</H2>
+<P>批处理文件里出现中文时，请保存为 ANSI 编码，并在开头加上：</P>
+<CODE>@echo off
+chcp 936
+</CODE>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;版本 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+本帮助文件随软件一同安装，可用「帮助 - 帮助目录」再次打开。</P>
+</BODY></HTML>

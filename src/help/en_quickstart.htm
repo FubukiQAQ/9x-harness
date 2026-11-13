@@ -1,0 +1,65 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<TITLE>Quick start</TITLE>
+<STYLE type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: "Courier New", monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;Help &nbsp;Version 3.00.2003</DIV>
+
+<H1>Quick start</H1>
+
+<H2>1. Start the program</H2>
+<P>Choose <B>Start - Programs - 9xHarness - 9xHarness</B>, or double-click
+the desktop icon. A splash screen appears for a second or two.</P>
+
+<H2>2. Fill in the server details</H2>
+<P>Open <B>Tools - Options</B>:</P>
+<TABLE>
+<TR><TH>Field</TH><TH>Meaning</TH></TR>
+<TR><TD>Server URL</TD><TD>Full endpoint, e.g.
+<CODE>https://api.deepseek.com/chat/completions</CODE></TD></TR>
+<TR><TD>Model name</TD><TD>Whatever your provider calls it, e.g. <CODE>deepseek-chat</CODE></TD></TR>
+<TR><TD>API key</TD><TD>The key from your provider, usually starting with <CODE>sk-</CODE></TD></TR>
+<TR><TD>Timeout (s)</TD><TD>Use <B>60</B> on an old machine</TD></TR>
+<TR><TD>Max output</TD><TD>Tokens per answer; <B>1024</B>-<B>2048</B> is sensible</TD></TR>
+</TABLE>
+<P>Press <B>Test connection</B>. "Network, encryption and authentication all OK"
+means you are ready.</P>
+
+<H2>3. Talk to it</H2>
+<P>Type in the box under the conversation pane, then press <B>Ctrl+Enter</B> or click
+<B>Send</B>. While it works the status bar shows "Connecting to server..." and the
+buttons grey out. Press <B>Esc</B> or <B>Stop</B> to abandon the request.</P>
+
+<H2>4. Let it do things</H2>
+<P>Tick <B>Allow the assistant to use local tools</B> at the bottom of the window, then
+ask for example:</P>
+<CODE>What folders are on drive D?
+Read notes.txt from my workspace and fix the typos
+Write a batch file that backs up D:\work to C:\BACKUP.BAT
+How much memory does this machine have?</CODE>
+<P>Whenever it wants to write a file or run a command, a confirmation box appears and
+you can say No.</P>
+
+<DIV class="warn"><B>Careful:</B> cloud answers are not always right. Read every
+command before you approve it, especially anything that deletes files.</DIV>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;Version 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+This help file is installed with the program; reopen it with Help - Help Topics.</P>
+</BODY></HTML>

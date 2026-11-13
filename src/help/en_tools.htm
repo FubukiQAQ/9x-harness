@@ -1,0 +1,73 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<TITLE>Tool calling</TITLE>
+<STYLE type="text/css">
+body { font-family: Verdana, Arial, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: "Courier New", monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;Help &nbsp;Version 3.00.2003</DIV>
+
+<H1>Tool calling</H1>
+<P>Tool calling means the cloud service may ask this program to do something on your
+computer, the program does it, and the result is sent back so the service can summarise
+it in plain language. You see every step in the conversation pane.</P>
+
+<H2>Available tools</H2>
+<TABLE>
+<TR><TH>Tool</TH><TH>What it does</TH><TH>Confirmation</TH></TR>
+<TR><TD>get_system_info</TD><TD>OS, CPU, memory, disks, screen, code page</TD><TD>No</TD></TR>
+<TR><TD>list_dir</TD><TD>List files and subfolders of a folder</TD><TD>No</TD></TR>
+<TR><TD>read_file</TD><TD>Read a text file (decoded as GBK/ANSI)</TD><TD>No</TD></TR>
+<TR><TD>write_file</TD><TD>Write text to a file (GBK, overwrites)</TD><TD><B>Yes</B></TD></TR>
+<TR><TD>run_command</TD><TD>Run a command through cmd.exe /c and capture output</TD><TD><B>Yes</B></TD></TR>
+<TR><TD>open_path</TD><TD>Open a file, folder or URL with the default program</TD><TD><B>Yes</B></TD></TR>
+<TR><TD>set_clipboard</TD><TD>Put text on the clipboard</TD><TD>No</TD></TR>
+</TABLE>
+
+<H2>The confirmation box</H2>
+<P>Writing files, running commands and opening things always asks first:</P>
+<CODE>The assistant wants to perform this operation. Allow it?
+
+Run in the command prompt:
+
+cmd.exe /c dir D:\work
+
+(If unsure, choose No.)</CODE>
+<P>Answering No tells the assistant the request was refused; it will not retry and
+instead explain and ask what to do differently. The box is never auto-approved.</P>
+
+<DIV class="warn"><B>Please be careful:</B> do not click Yes out of habit. A prompt can
+be crafted so that the service emits <CODE>del /s /q</CODE> or
+<CODE>format</CODE>. If you do not recognise the command, say No.</DIV>
+
+<H2>Turning it off</H2>
+<P>Clear <B>Allow the assistant to use local tools</B> at the bottom of the main window
+and it will only give written advice.</P>
+
+<H2>How many tool calls per question</H2>
+<P>Each turn may run at most <B>8</B> tool calls; after that the program stops and asks
+you to split the task.</P>
+
+<H2>Encoding</H2>
+<P>Internally the program uses the system code page (936, GBK, on Simplified Chinese
+Windows) while the network API uses UTF-8; conversion is automatic. Files that are
+themselves UTF-8 will look garbled, because programs of this era assume GBK.</P>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;Version 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+This help file is installed with the program; reopen it with Help - Help Topics.</P>
+</BODY></HTML>

@@ -1,0 +1,72 @@
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>工具调用说明</TITLE>
+<STYLE type="text/css">
+body { font-family: 宋体, SimSun, sans-serif; font-size: 9pt; background: #FFFFFF;
+       margin: 12px 16px; color: #000000; }
+h1 { font-size: 13pt; color: #000080; border-bottom: 1px solid #808080; padding-bottom: 4px; }
+h2 { font-size: 11pt; color: #000080; margin-top: 18px; }
+h3 { font-size: 10pt; color: #404040; margin-top: 14px; }
+p  { margin: 6px 0; line-height: 150%; }
+li { margin: 3px 0; line-height: 140%; }
+code, pre { font-family: 新宋体, NSimSun, monospace; font-size: 9pt;
+       background: #F0F0F0; border: 1px solid #C0C0C0; padding: 6px; display: block; }
+table { border-collapse: collapse; font-size: 9pt; }
+td, th { border: 1px solid #A0A0A0; padding: 3px 8px; }
+th { background: #E0E0E0; }
+.note { background: #FFFFE0; border: 1px solid #C0A000; padding: 8px; margin: 10px 0; }
+.warn { background: #FFE8E8; border: 1px solid #C00000; padding: 8px; margin: 10px 0; }
+.hd { color: #808080; font-size: 8pt; border-bottom: 1px dotted #C0C0C0;
+      padding-bottom: 4px; margin-bottom: 12px; }
+</STYLE></HEAD><BODY>
+<DIV class="hd">9xHarness &nbsp;帮助 &nbsp;版本 3.00.2003</DIV>
+
+<H1>工具调用说明</H1>
+<P>“工具调用”是指：云端服务在回答时，可以请求本程序在您的电脑上做一件具体的事，
+本程序执行后再把结果送回给它，最后它用中文向您汇报。整个过程您都能在右栏看到——
+灰色的“调用工具”字样就是。</P>
+
+<H2>助手可以使用的工具</H2>
+<TABLE>
+<TR><TH>工具</TH><TH>作用</TH><TH>是否需确认</TH></TR>
+<TR><TD>get_system_info</TD><TD>读取系统版本、CPU、内存、磁盘、屏幕、代码页</TD><TD>否</TD></TR>
+<TR><TD>list_dir</TD><TD>列出某个文件夹里的文件与子文件夹</TD><TD>否</TD></TR>
+<TR><TD>read_file</TD><TD>读取文本文件内容（按 GBK 解码）</TD><TD>否</TD></TR>
+<TR><TD>write_file</TD><TD>把文字写入文件（GBK 编码，会覆盖原文件）</TD><TD><B>是</B></TD></TR>
+<TR><TD>run_command</TD><TD>用 cmd.exe /c 执行一条命令并取回输出</TD><TD><B>是</B></TD></TR>
+<TR><TD>open_path</TD><TD>用系统默认程序打开文件、文件夹或网址</TD><TD><B>是</B></TD></TR>
+<TR><TD>set_clipboard</TD><TD>把文字放进剪贴板</TD><TD>否</TD></TR>
+</TABLE>
+
+<H2>确认对话框</H2>
+<P>当助手要写文件、执行命令或打开东西时，会弹出这样的框：</P>
+<CODE>智能助手想要执行下面的操作，是否允许？
+
+在命令提示符中执行：
+
+cmd.exe /c dir D:\工作
+
+（如果不放心，请选择“否”。）</CODE>
+<P>选择「否」后，助手会收到“用户拒绝”的消息，不会重试，而是向您解释并询问别的
+做法。这个对话框永远不会自动通过。</P>
+
+<DIV class="warn"><B>请特别注意：</B>不要因为嫌麻烦就一路按“是”。提问可能被诱导，
+使云端服务生成 <CODE>del /s /q</CODE>、<CODE>format</CODE> 这类危险命令。看到不认识
+的内容，请选择“否”。</DIV>
+
+<H2>关掉工具调用</H2>
+<P>取消勾选主窗口下方的「允许智能助手调用本机工具」即可。此时助手只会给文字建议。</P>
+
+<H2>一次提问最多调用几次工具</H2>
+<P>为了防止死循环，每一轮对话最多执行 <B>8 次</B>工具调用，超过后会自动停止并提示
+您把需求拆小一些。</P>
+
+<H2>编码问题</H2>
+<P>本程序内部使用系统代码页（简体中文系统为 <B>GBK</B>，即代码页 936），而网络接口
+使用 <B>UTF-8</B>，程序会自动双向转换。但如果文件本身是 UTF-8 编码的，读出来的中文
+可能显示为乱码——那个年代的程序默认都按 GBK 处理文本。</P>
+
+<HR size="1" color="#C0C0C0">
+<P style="font-size:8pt;color:#808080">9xHarness &nbsp;版本 3.00.2003 &nbsp;&nbsp;
+Axiom Software &nbsp;&nbsp; 1993-2003 &nbsp;&nbsp;
+本帮助文件随软件一同安装，可用「帮助 - 帮助目录」再次打开。</P>
+</BODY></HTML>
