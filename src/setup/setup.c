@@ -89,6 +89,37 @@ typedef struct {
 static Setup S;
 
 /* ------------------------------------------------------------------ */
+/* ---------------- 崩溃定位用的检查点 ---------------- */
+static int g_ck = 0;
+
+static void ck(int n, const char *what)
+{
+    g_ck = n;
+    sm_logf("ck=%d %s", n, what);
+}
+
+static LONG WINAPI setup_fault_filter(EXCEPTION_POINTERS *ep)
+{
+    if (ep && ep->ExceptionRecord && ep->ContextRecord) {
+        sm_logf("FAULT ck=%d code=%08lX eip=%08lX esp=%08lX ebp=%08lX "
+                "eax=%08lX ebx=%08lX ecx=%08lX edx=%08lX esi=%08lX edi=%08lX",
+                g_ck,
+                (unsigned long)ep->ExceptionRecord->ExceptionCode,
+                (unsigned long)ep->ContextRecord->Eip,
+                (unsigned long)ep->ContextRecord->Esp,
+                (unsigned long)ep->ContextRecord->Ebp,
+                (unsigned long)ep->ContextRecord->Eax,
+                (unsigned long)ep->ContextRecord->Ebx,
+                (unsigned long)ep->ContextRecord->Ecx,
+                (unsigned long)ep->ContextRecord->Edx,
+                (unsigned long)ep->ContextRecord->Esi,
+                (unsigned long)ep->ContextRecord->Edi);
+    } else {
+        sm_logf("FAULT ck=%d (no context)", g_ck);
+    }
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+
 static HWND mk(const char *cls, const char *txt, DWORD style, int x, int y,
                int w, int h, int id, HFONT f)
 {
@@ -104,6 +135,7 @@ static HWND mk(const char *cls, const char *txt, DWORD style, int x, int y,
 
 static void page_destroy(void)
 {
+    ck(33, "page_destroy enter");
     int i;
     for (i = 0; i < S.nctl; i++)
         if (S.ctl[i]) DestroyWindow(S.ctl[i]);
@@ -157,6 +189,7 @@ typedef struct {
 
 static int load_embedded_arc(void)
 {
+    ck(35, "load_embedded_arc enter");
     char exe[MAX_PATH + 2];
     FILE *f;
     long fileLen, payloadLen;
@@ -207,7 +240,17 @@ static WNDPROC g_licOldProc = NULL;
 
 static LRESULT CALLBACK LicEditProc(HWND hh, UINT m, WPARAM w, LPARAM l)
 {
-    LRESULT r = CallWindowProcA(g_licOldProc, hh, m, w, l);
+    LRESULT r;
+
+    /* 子类化没装成功时绝不能调 CallWindowProcA(NULL)：9x 上会跳到野地址。
+     * 另外顺手记一条日志，便于确认有没有进来。 */
+    if (!g_licOldProc) {
+        if (m != WM_PAINT && m != WM_NCPAINT && m != WM_ERASEBKGND) {
+            sm_logf("lic: no old proc, msg=0x%04X", (unsigned)m);
+        }
+        return DefWindowProcA(hh, m, w, l);
+    }
+    r = CallWindowProcA(g_licOldProc, hh, m, w, l);
     switch (m) {
     case WM_VSCROLL:
     case WM_HSCROLL:
@@ -300,6 +343,7 @@ static void set_title(const char *t)
 /* 中英文各用一套字体：宋体没有拉丁字形，英文会掉到等宽字体上去 */
 static void make_fonts(void)
 {
+    ck(30, "make_fonts enter");
     LOGFONTA lf;
     int en = (lang_get() == LANG_EN);
     const char *face = en ? "Tahoma" : "宋体";
@@ -345,6 +389,7 @@ static void update_buttons(void)
 /* 换语言后：重刷框架上的文字和当前页 */
 static void refresh_lang(void)
 {
+    ck(31, "refresh_lang enter");
     HWND c;
     make_fonts();
     SetWindowTextA(S.h, TS("" SM_SHORT_NAME " 安装向导", "" SM_SHORT_NAME " Setup"));
@@ -412,6 +457,7 @@ static const char *license_fallback(void)
 /* ------------------------------------------------------------------ */
 static void page_create(int page)
 {
+    ck(32, "page_create enter");
     int y = 54;
     page_destroy();
     S.page = page;
@@ -1060,6 +1106,7 @@ static int do_install(void)
 /* ------------------------------------------------------------------ */
 static void goto_page(int page)
 {
+    ck(36, "goto_page enter");
     if (page == PG_PROGRESS && !S.installed) {
         page_create(PG_PROGRESS);
         pump();
@@ -1158,9 +1205,11 @@ static LRESULT CALLBACK WizProc(HWND h, UINT m, WPARAM w, LPARAM l)
 {
     switch (m) {
     case WM_CREATE:
+        ck(40, "WM_CREATE enter");
         return 0;
 
     case WM_PAINT: {
+        ck(41, "WM_PAINT enter");
         PAINTSTRUCT ps;
         HDC dc = BeginPaint(h, &ps);
         RECT r;
@@ -1280,6 +1329,7 @@ static LRESULT CALLBACK WizProc(HWND h, UINT m, WPARAM w, LPARAM l)
 /* ------------------------------------------------------------------ */
 static void load_setup_ins(void)
 {
+    ck(34, "load_setup_ins enter");
     char *dir = sm_exe_dir();
     char *ins = sm_path_join(dir, "SETUP.INS");
     char *v;
@@ -1396,18 +1446,32 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
     S.page = PG_WELCOME;
     S.licenceOk = 0;
 
+    SetUnhandledExceptionFilter(setup_fault_filter);
+    ck(10, "WinMain entry");
+    sm_logf("SETUP image: base=%08lX wizproc=%08lX licproc=%08lX bytes=%lu",
+            (unsigned long)(INT_PTR)GetModuleHandleA(NULL),
+            (unsigned long)(INT_PTR)&WizProc,
+            (unsigned long)(INT_PTR)&LicEditProc,
+            (unsigned long)GetModuleFileNameA(NULL, NULL, 0));
+
     icc.dwSize = sizeof(icc);
     icc.dwICC = ICC_BAR_CLASSES | ICC_STANDARD_CLASSES | ICC_LISTVIEW_CLASSES;
     sm_logf("SETUP start: build=%s os=%s dir=[%s] cmd=[%s]",
             S.appVersion, sm_get_os_name(), S.setupDir, GetCommandLineA());
+    ck(11, "before load_embedded_arc");
     load_embedded_arc();
+    ck(12, "before InitCommonControlsEx");
     InitCommonControlsEx(&icc);
+    ck(13, "before OleInitialize");
     OleInitialize(NULL);
+    ck(14, "before make_fonts");
 
     S.brFace = (HBRUSH)(COLOR_BTNFACE + 1);
     make_fonts();
+    ck(15, "fonts done, before lang_load");
 
     lang_load();
+    ck(16, "lang_load done");
     {
         char *ini2 = sm_ini_path();
         char *lv = sm_ini_get(ini2, "display", "language", "");
@@ -1416,7 +1480,9 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
         sm_free(lv);
         sm_free(ini2);
     }
+    ck(17, "lang detect done, before load_setup_ins");
     load_setup_ins();
+    ck(18, "load_setup_ins done");
     sm_logf("SETUP ready: product=%s version=%s defaultDir=[%s] lang=%s",
             S.appName, S.appVersion, S.defaultDir,
             lang_get() == LANG_EN ? "en" : "zh");
@@ -1439,7 +1505,9 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
     wc.hCursor = LoadCursorA(NULL, IDC_ARROW);
     wc.hbrBackground = S.brFace;
     wc.lpszClassName = "NeuroBenchSetup";
-    if (!RegisterClassA(&wc)) return 1;
+    ck(19, "before RegisterClass");
+    if (!RegisterClassA(&wc)) { ck(90, "RegisterClass FAILED"); return 1; }
+    ck(20, "class registered");
 
     {
         RECT rc = { 0, 0, WIZ_W, WIZ_H };
@@ -1451,8 +1519,10 @@ int PASCAL WinMain(HINSTANCE inst, HINSTANCE prev, LPSTR cmd, int show)
                             rc.right - rc.left, rc.bottom - rc.top,
                             NULL, NULL, inst, NULL);
     }
+    ck(21, "CreateWindow returned");
     if (!h) return 1;
     S.h = h;
+    ck(22, "main window live");
 
     /* 标题与底部按钮（常驻） */
     {
