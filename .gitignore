@@ -28,3 +28,10 @@ __pycache__/
 # mkchm 自测留下的截图
 tools/selftest_*.png
 
+
+# 品牌头文件由 tools/mkbrand.py 生成（含本机绝对路径，不进仓库）
+src/common/nb_brand.h
+src/common/brand_res.h
+src/common/brand_rc.inc
+src/common/brand_summary.json
+
