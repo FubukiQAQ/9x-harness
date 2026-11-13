@@ -426,6 +426,7 @@ void conv_new(void)
     sm_write_file(full, sb_str(&b), (long)b.len);
     sb_free(&b);
 
+    sm_logf("conv_new: [%s] workspace=[%s]", full, g_wsCur);
     conv_set_path(full);
     chat_clear();
     chat_history_reset();

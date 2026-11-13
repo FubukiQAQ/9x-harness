@@ -707,6 +707,36 @@ static void do_open_conv(void)
     if (GetOpenFileNameA(&ofn)) ws_open_path(path);
 }
 
+/* 记住当前工作区（下次启动恢复） */
+static void ws_remember(void)
+{
+    char *ini = sm_ini_path();
+    if (ini) {
+        sm_ini_set(ini, "session", "workspace", ws_current());
+        sm_free(ini);
+    }
+}
+
+/* 启动时恢复上次的工作区；目录不在了就留在 Default */
+static void ws_restore(void)
+{
+    char *ini = sm_ini_path();
+    char *w;
+    if (!ini) return;
+    w = sm_ini_get(ini, "session", "workspace", "");
+    if (w && w[0] && sm_stricmp(w, ws_current())) {
+        char *root = ws_root();
+        char *dir = sm_path_join(root, w);
+        if (GetFileAttributesA(dir) != 0xFFFFFFFF) {
+            ws_switch_to(w);
+            sm_logf("ws_restore: [%s]", w);
+        }
+        sm_free(dir);
+    }
+    sm_free(w);
+    sm_free(ini);
+}
+
 static void do_ws_new(void)
 {
     char name[128];
@@ -721,8 +751,10 @@ static void do_ws_new(void)
     if (!name[0]) return;
     if (ws_create(name)) {
         ws_populate_list();
+        conv_new();          /* 新工作区 → 新会话，避免模型还看着上一个工作区的对话 */
+        ws_remember();
         sm_update_title();
-        sm_logf("ws_new: ok");
+        sm_logf("ws_new: ok, new conversation started");
     } else {
         char m[400];
         _snprintf(m, sizeof(m),
@@ -759,6 +791,9 @@ static void do_ws_delete(void)
     if (MessageBoxA(g.hFrame, m, SM_SHORT_NAME, MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2) == IDYES) {
         ws_delete(cur);
         conv_set_path("");
+        chat_clear();
+        chat_history_reset();
+        g.turnCount = 0;
         sm_update_title();
     }
 }
@@ -1301,7 +1336,9 @@ static LRESULT CALLBACK FrameProc(HWND h, UINT m, WPARAM w, LPARAM l)
                 if (sm_stricmp(buf, ws_current())) {
                     if (conv_dirty()) conv_save();
                     ws_switch_to(buf);
-                    conv_set_path("");
+                    conv_new();      /* 换工作区 → 换会话，别把旧工作区的上下文带过来 */
+                    ws_remember();
+                    sm_logf("ws_switch: [%s] new conversation", buf);
                     sm_update_title();
                 }
             }
@@ -1461,6 +1498,7 @@ int PASCAL WinMain(HINSTANCE hInst, HINSTANCE hPrev, LPSTR cmd, int show)
 
     /* 工作区 */
     ws_init();
+    ws_restore();
     sm_status_set(0, L(STR_STATUS_READY));
     {
         char b[160];

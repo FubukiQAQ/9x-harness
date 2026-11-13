@@ -240,6 +240,14 @@ void tools_sysinfo_text(Sb *out)
         sm_free(d);
     }
     {
+        /* 当前工作区：模型要往这里放文件，必须让它知道 */
+        char *wd = ws_current_dir();
+        sb_printf(out, "%s %s\r\n", T2("当前工作区：", "Workspace:"),
+                  ws_current()[0] ? ws_current() : T2("(无)", "(none)"));
+        sb_printf(out, "%s %s\r\n", T2("工作区目录：", "Workspace folder:"), wd);
+        sm_free(wd);
+    }
+    {
         char td[64];
         sm_now_str_era(td, sizeof(td));
         sb_printf(out, "%s %s\r\n", T2("当前时间：", "Local time:"), td);

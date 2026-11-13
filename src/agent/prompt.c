@@ -143,6 +143,8 @@ static char *prompt_expand(const char *tpl)
     char cpbuf[24];
     char modelbuf[160];
     char toolsbuf[512];
+    char *wsdir = ws_current_dir();          /* 当前工作区目录（用完要释放） */
+    const char *wsname = ws_current();
 
     sm_now_str_era(now, sizeof(now));
     sm_license_state_text(&g.lic, lic, sizeof(lic));
@@ -175,7 +177,7 @@ static char *prompt_expand(const char *tpl)
     while (*p) {
         if (*p == '%') {
             const char *e = strchr(p + 1, '%');
-            if (e && (e - p - 1) >= 2 && (e - p - 1) <= 12) {
+            if (e && (e - p - 1) >= 2 && (e - p - 1) <= 16) {
                 char tok[16];
                 int n = (int)(e - p - 1);
                 memcpy(tok, p + 1, (size_t)n);
@@ -186,6 +188,12 @@ static char *prompt_expand(const char *tpl)
                 if (!_stricmp(tok, "LICENSE")) { sb_puts(&b, lic); p = e + 1; continue; }
                 if (!_stricmp(tok, "MODEL")) { sb_puts(&b, modelbuf); p = e + 1; continue; }
                 if (!_stricmp(tok, "TOOLS")) { sb_puts(&b, toolsbuf); p = e + 1; continue; }
+                if (!_stricmp(tok, "WS")) { sb_puts(&b, wsdir); p = e + 1; continue; }
+                if (!_stricmp(tok, "WSNAME")) {
+                    sb_puts(&b, wsname[0] ? wsname : (en ? "(none)" : "(无)"));
+                    p = e + 1;
+                    continue;
+                }
                 if (!_stricmp(tok, "LANG")) {
                     sb_puts(&b, en ? "English" : "简体中文");
                     p = e + 1;
@@ -197,6 +205,7 @@ static char *prompt_expand(const char *tpl)
         p++;
     }
     sm_free(osn);
+    sm_free(wsdir);
     return sb_take(&b);
 }
 
@@ -224,6 +233,9 @@ char *prompt_default_template(void)
         sb_puts(&b, "- Licence: %LICENSE%\r\n");
         sb_puts(&b, "- Configured model: %MODEL%\r\n");
         sb_puts(&b, "- UI language: English\r\n");
+        sb_puts(&b, "- Workspace: %WSNAME%\r\n");
+        sb_puts(&b, "- Workspace folder: %WS% (the user's files live here; "
+                    "put new files in this folder unless told otherwise)\r\n");
         sb_puts(&b, "- %TOOLS%\r\n");
         sb_puts(&b, "\r\nKeep the first reply short; ask what they want to do.\r\n");
     } else {
@@ -241,6 +253,9 @@ char *prompt_default_template(void)
         sb_puts(&b, "- 授权状态：%LICENSE%\r\n");
         sb_puts(&b, "- 用户配置的服务器型号：%MODEL%\r\n");
         sb_puts(&b, "- 界面语言：简体中文\r\n");
+        sb_puts(&b, "- 当前工作区：%WSNAME%\r\n");
+        sb_puts(&b, "- 工作区目录：%WS%（用户的文件都在这里，除非另有说明，"
+                    "新建文件请放到这个目录）\r\n");
         sb_puts(&b, "- %TOOLS%\r\n");
         sb_puts(&b, "\r\n用户的第一次讲话，请只是寒暄。请直接、简短地回应，然后问他们需要做什么。\r\n");
     }
